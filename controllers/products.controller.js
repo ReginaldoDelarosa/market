@@ -66,3 +66,19 @@ exports.updateProduct = async (req, res) => {
     res.status(500).send('Error al actualizar el producto');
   }
 };
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const conn = await pool.getConnection();
+    const [result] = await conn.query('DELETE FROM productos WHERE codigo = ?', [req.params.codigo]);
+    conn.release();
+    if (result.affectedRows === 0) {
+      res.status(404).send('producto no encontrado');
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al eliminar el producto');
+  }
+};

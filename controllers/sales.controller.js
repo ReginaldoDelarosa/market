@@ -70,3 +70,34 @@ exports.updateSale = async (req, res) => {
     res.status(500).send('Error al actualizar la venta');
   }
 };
+exports.getSaleByCode = async (req, res) => {
+  try {
+    const conn = await pool.getConnection();
+    const [rows] = await conn.query('SELECT * FROM ventas WHERE codigo = ?', [req.params.codigo]);
+    conn.release();
+    if (rows.length === 0) {
+      res.status(404).send('venta no encontrada');
+    } else {
+      res.json(rows[0]);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al obtener la venta');
+  }
+};
+
+exports.deleteSale = async (req, res) => {
+  try {
+    const conn = await pool.getConnection();
+    const [result] = await conn.query('DELETE FROM ventas WHERE codigo = ?', [req.params.codigo]);
+    conn.release();
+    if (result.affectedRows === 0) {
+      res.status(404).send('venta no encontrada');
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al eliminar la venta');
+  }
+};
