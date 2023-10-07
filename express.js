@@ -6,12 +6,12 @@ const app = express();
 
 // Configuración de la conexión a la base de datos
 const pool = mysql.createPool({
-  host: 'lyn7gfxo996yjjco.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  user: 'd1f4i7n8p4phd0xi',
-  password: 'ujr5diknro1d9q21',
-  database: 'ne70en5twe269oni',
+  host: "lfmerukkeiac5y5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "zl7hscl57lqj6v8t",
+  password: "q34349j21foz3kaj",
+  database: "sw0dlc2au9k1ddsd",
   port: 3306,
-  multipleStatements: true
+  multipleStatements: true,
 });
 
 // Creación de las tablas si no existen
